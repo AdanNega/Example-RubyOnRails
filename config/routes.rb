@@ -6,8 +6,6 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
-  get "articles/user/:user_id", to: "articles#from_author"
-
   resources :articles do
     get "user/:user_id", to: "articles#from_author", on: :collection
   end
