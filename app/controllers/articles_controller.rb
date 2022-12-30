@@ -18,15 +18,16 @@ class ArticlesController < ApplicationController
     
     def edit
         puts "\n\n\n #{@article.persisted?} \n\n\n"
+        @categories = Category.all
     end
     
     def new
         @article = Article.new
+        @categories = Category.all
     end
 
     def create
         @article = current_user.articles.create(article_params)
-        @categories = Category.all
 
         @article.save_categories
 
@@ -47,7 +48,7 @@ class ArticlesController < ApplicationController
     end
 
     def article_params
-        params.require(:article).permit(:title,:content, :category_elements)
+        params.require(:article).permit(:title,:content, category_elements: [])
     end
 
 end
